@@ -121,7 +121,7 @@ const AboutPage = () => {
           </p>
         </div>
         <a
-          href="https://github.com/TU_USUARIO/TU_REPO"
+          href="https://github.com/sirlencio/IsMySteamLinuxReady"
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-bold hover:bg-gray-200 transition"

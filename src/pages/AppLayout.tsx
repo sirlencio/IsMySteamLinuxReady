@@ -16,15 +16,15 @@ const AppLayout = () => {
           <p>
             © {new Date().getFullYear()} LinuxReady - Built by{" "}
             <a
-              href="https://github.com/TU_USUARIO"
+              href="https://github.com/sirlencio"
               className="text-white hover:underline"
             >
-              @Sirlencio
+              Sirlencio
             </a>
           </p>
           <div className="flex gap-6">
             <a
-              href="https://github.com/TU_USUARIO/TU_REPO"
+              href="https://github.com/sirlencio/IsMySteamLinuxReady"
               className="hover:text-white transition"
             >
               Repository
