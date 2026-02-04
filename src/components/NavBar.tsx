@@ -45,15 +45,23 @@ const NavBar = () => {
           </div>
 
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-3 group">
-              {/* Aqui iria un logo 
-              <div className="p-2 bg-indigo-500 rounded-lg group-hover:bg-indigo-400 transition">
-
+            <Link to="/" className="flex items-center gap-4 group">
+              <div className="p-2 bg-indigo-500 rounded-xl group-hover:bg-indigo-400 transition-all duration-300 shadow-lg shadow-indigo-500/20">
+                <img
+                  src="logo.png"
+                  alt="logo"
+                  className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
+                />
               </div>
-              */}
-              <span className="text-white font-bold tracking-tighter hidden sm:block">
-                LINUX<span className="text-indigo-400">READY</span>
-              </span>
+
+              <div className="flex flex-col justify-center">
+                <span className="text-white text-xl sm:text-2xl font-black tracking-tighter leading-none hidden sm:block">
+                  LINUX<span className="text-indigo-400">READY</span>
+                </span>
+                <span className="text-[10px] text-gray-500 font-bold tracking-[0.2em] uppercase hidden sm:block">
+                  Steam Compatibility
+                </span>
+              </div>
             </Link>
           </div>
 
@@ -80,8 +88,11 @@ const NavBar = () => {
         </div>
       </div>
 
-      <DisclosurePanel className="sm:hidden bg-(--body-bg-color) border-b border-(--border-color)">
-        <div className="space-y-1 px-2 pt-2 pb-3 shadow-2xl">
+      <DisclosurePanel
+        className="sm:hidden border-b border-(--border-color) backdrop-blur-md"
+        style={{ backgroundColor: "rgba(10, 10, 10, 0.7)" }}
+      >
+        <div className="space-y-1 px-4 pt-2 pb-6 shadow-2xl">
           {navigation.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -91,9 +102,9 @@ const NavBar = () => {
                 to={item.href}
                 className={classNames(
                   isActive
-                    ? "text-white bg-white/10"
+                    ? "text-white bg-indigo-500/20 border-l-2 border-indigo-500"
                     : "text-gray-400 hover:text-white hover:bg-white/5",
-                  "block rounded-md px-3 py-2 text-base font-medium transition",
+                  "block px-3 py-3 text-base font-medium transition-all",
                 )}
               >
                 {item.name}

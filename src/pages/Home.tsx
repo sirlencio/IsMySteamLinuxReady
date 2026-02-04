@@ -94,7 +94,7 @@ const Home = () => {
             <button
               type="submit"
               disabled={isResolving}
-              className="bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-700 text-white px-8 py-2 rounded-xl font-bold transition-all flex items-center gap-2"
+              className="bg-indigo-600 hover:bg-indigo-500 disabled:bg-gray-700 text-white px-2 py-2 rounded-xl font-bold transition-all flex items-center gap-2 sm:px-8"
             >
               {isResolving ? (
                 <ArrowPathIcon className="size-5 animate-spin" />
