@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:root {
+  --navbar-height: 48px;
+  --body-bg-color: oklch(21.35% 0.0146 266.89deg);
+  --body-color: #ddd;
+  --contrast-color: #fff;
+  --border-color: hsl(216deg 25% 30%);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--body-bg-color);
+  color: var(--body-color);
+}
