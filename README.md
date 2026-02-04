@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+## LinuxReady
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**LinuxReady** is a web tool designed for gamers looking to migrate from Windows to Linux. It analyzes your Steam library and provides a detailed compatibility report using data from **ProtonDB** and **SteamGridDB**.
 
-Currently, two official plugins are available:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9cfdf463-178a-4393-b599-19324322ba87/deploy-status)](https://app.netlify.com/projects/ismysteamlinuxready/deploys)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## The Mission
+Windows is increasingly cluttered with telemetry and forced updates. With the rise of the **Steam Deck** and **Proton**, Linux has become a superior alternative for many. This project helps users visualize that their game library is already "Linux Ready".
 
-## React Compiler
+## Tech Stack
+- **Frontend:** React 18 + TypeScript + Tailwind CSS.
+- **Routing:** React Router 7.
+- **Backend:** Netlify Functions (Serverless Node.js).
+- **Caching:** Upstash Redis (to optimize API rate limits and performance).
+- **State Management:** React Hooks (Context/State).
+- **Icons & UI:** Headless UI + Heroicons + Sonner (Toasts).
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## Key Technical Challenges
+### 1. SteamID Resolution
+Users often paste their profile URL instead of their 64-bit SteamID. I implemented a **Serverless resolver** that detects the input type (URL, Vanity Name, or ID) and communicates with the Steam API to normalize the data before fetching the library.
 
-## Expanding the ESLint configuration
+### 2. High Performance Caching
+Steam and ProtonDB APIs can be slow or have rate limits. To ensure a "snappy" user experience:
+- I integrated **Upstash Redis** to cache compatibility results.
+- This reduces the load time for popular profiles from ~3s to **less than 200ms** on subsequent visits.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 3. Serverless Architecture
+By using **Netlify Functions**, the project remains cost-effective and scalable. All sensitive API Keys (Steam, SteamGridDB, Redis) are handled server-side, keeping the client-side clean and secure.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Local Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/sirlencio/IsMySteamLinuxReady
+   ```
+   Install dependencies:
+   ```bash
+    npm install
+   ```
+    Create a .env file in the root with your keys:
+   ```
+    STEAM_API_KEY=your_key
+    STEAMGRIDDB_API_KEY=your_key
+    UPSTASH_REDIS_REST_URL=your_url
+    UPSTASH_REDIS_REST_TOKEN=your_token
+   ```
+    Run the development server (Netlify CLI recommended for Functions):
+    ```bash
+    netlify dev
+    ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Attribution
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+  Data provided by [ProtonDB](https://www.protondb.com/).
+  
+  Assets and covers by [SteamGridDB](https://www.steamgriddb.com/).
+  
+  Built by Sirlencio.
