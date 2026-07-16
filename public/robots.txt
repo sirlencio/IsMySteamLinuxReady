@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /about
+Disallow: /user/
+
+Sitemap: https://ismysteamlinuxready.netlify.app/sitemap.xml
